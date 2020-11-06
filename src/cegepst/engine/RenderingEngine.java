@@ -56,9 +56,9 @@ public class RenderingEngine {
     private void initializeFrame() {
         frame = new JFrame();
         frame.setSize(windowWidth, windowHeight);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(null); //centre la fenetre
         frame.setResizable(false);    //empeche la redimension
-        frame.setTitle("TankGame");
+        frame.setTitle("Viking Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //programme le bouton X pour quitter le programme
         frame.setUndecorated(true); //enleve la bar en haut
     }

@@ -5,8 +5,26 @@ import cegepst.engine.Game;
 
 public class VikingGame extends Game {
 
-    public VikingGame() {
+    private GamePad gamePad;
+    private Viking viking;
 
+    public VikingGame() {
+        gamePad = new GamePad();
+        viking = new Viking(gamePad);
+        viking.teleport(100 ,100);
+    }
+
+    @Override
+    public void update() {
+        if (gamePad.isQuitPressed()) {
+            super.stop();
+        }
+        viking.update();
+    }
+
+    @Override
+    public void draw(Buffer buffer) {
+        viking.draw(buffer);
     }
 
     @Override
@@ -16,16 +34,6 @@ public class VikingGame extends Game {
 
     @Override
     public void conclude() {
-
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public void draw(Buffer buffer) {
 
     }
 }
