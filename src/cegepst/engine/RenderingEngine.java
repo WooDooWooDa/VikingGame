@@ -59,7 +59,7 @@ public class RenderingEngine {
 
     private void initializeFrame() {
         screen = new Screen();
-        screen.setSize(800, 600);
+        screen.setSize(screeWidth, screenHeight);
         screen.setTitle("Viking Game");
     }
 
