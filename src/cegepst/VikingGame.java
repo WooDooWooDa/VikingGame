@@ -23,14 +23,25 @@ public class VikingGame extends Game {
         if (gamePad.isQuitPressed()) {
             super.stop();
         }
+        if (viking.getY() < foreverAloneTree.getY() + 52) {
+            foreverAloneTree.treeRootFromTop();
+        } else {
+            foreverAloneTree.treeRootFromBottom();
+        }
         viking.update();
     }
 
     @Override
     public void draw(Buffer buffer) {
         world.draw(buffer);
-        viking.draw(buffer);
-        foreverAloneTree.draw(buffer);
+        if (viking.getY() < foreverAloneTree.getY() + 52) {
+            viking.draw(buffer);
+            foreverAloneTree.draw(buffer);
+        } else {
+            foreverAloneTree.draw(buffer);
+            viking.draw(buffer);
+        }
+
     }
 
     @Override

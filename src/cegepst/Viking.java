@@ -26,7 +26,7 @@ public class Viking extends ControllableEntity {
     public Viking(MovementController gamePad) {
         super(gamePad);
         setDimension(32,32);
-        setSpeed(3);
+        setSpeed(2);
         loadSpriteSheet();
         loadFrames();
     }
