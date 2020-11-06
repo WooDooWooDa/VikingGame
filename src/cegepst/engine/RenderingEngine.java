@@ -8,12 +8,12 @@ import java.awt.image.BufferedImage;
 public class RenderingEngine {
     private static RenderingEngine instance;
 
-    private JFrame frame;
+    private Screen screen;
     private JPanel panel;
     private BufferedImage bufferedImage;
 
-    private final int windowWidth = 800;
-    private final int windowHeight = 600;
+    private final int screeWidth = 800;
+    private final int screenHeight = 600;
 
     public static RenderingEngine getInstance() {
         if (instance == null) {
@@ -22,16 +22,20 @@ public class RenderingEngine {
         return instance;
     }
 
+    public Screen getScreen() {
+        return screen;
+    }
+
     public void start() {
-        frame.setVisible(true);
+        screen.start();
     }
 
     public void stop() {
-        frame.dispose();
+        screen.end();
     }
 
     public Buffer getRenderingBuffer() {
-        bufferedImage = new BufferedImage(windowWidth, windowHeight, BufferedImage.TYPE_INT_RGB);
+        bufferedImage = new BufferedImage(screeWidth, screenHeight, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = bufferedImage.createGraphics();
         graphics.setRenderingHints(getRenderingHints());
         return new Buffer(graphics);
@@ -54,13 +58,9 @@ public class RenderingEngine {
     }
 
     private void initializeFrame() {
-        frame = new JFrame();
-        frame.setSize(windowWidth, windowHeight);
-        frame.setLocationRelativeTo(null); //centre la fenetre
-        frame.setResizable(false);    //empeche la redimension
-        frame.setTitle("Viking Game");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     //programme le bouton X pour quitter le programme
-        frame.setUndecorated(true); //enleve la bar en haut
+        screen = new Screen();
+        screen.setSize(800, 600);
+        screen.setTitle("Viking Game");
     }
 
     private void initializePanel() {
@@ -68,7 +68,7 @@ public class RenderingEngine {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
-        frame.add(panel);
+        screen.setPanel(panel);
     }
 
     private RenderingHints getRenderingHints() {

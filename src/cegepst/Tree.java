@@ -33,7 +33,7 @@ public class Tree extends StaticEntity {
     }
 
     public void treeRootFromBottom() {
-        treeRoot.teleport(x + 16, y + 48);
+        treeRoot.teleport(x + 16, y + 38);
     }
 
     private void loadImage() {
