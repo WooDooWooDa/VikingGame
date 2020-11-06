@@ -7,10 +7,14 @@ public class VikingGame extends Game {
 
     private GamePad gamePad;
     private Viking viking;
+    private World world;
+    private Tree foreverAloneTree;
 
     public VikingGame() {
         gamePad = new GamePad();
         viking = new Viking(gamePad);
+        world = new World();
+        foreverAloneTree = new Tree(250, 300);
         viking.teleport(100 ,100);
     }
 
@@ -24,7 +28,9 @@ public class VikingGame extends Game {
 
     @Override
     public void draw(Buffer buffer) {
+        world.draw(buffer);
         viking.draw(buffer);
+        foreverAloneTree.draw(buffer);
     }
 
     @Override
