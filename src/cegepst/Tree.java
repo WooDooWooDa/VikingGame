@@ -7,6 +7,6 @@ public class Tree extends StaticEntity {
 
     @Override
     public void draw(Buffer buffer) {
-        buffer.drawImage();
+        //buffer.drawImage();
     }
 }

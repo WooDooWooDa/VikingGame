@@ -10,8 +10,8 @@ public class Buffer {
         this.graphics = graphics;
     }
 
-    public void drawImage() {
-
+    public void drawImage(Image image, int x, int y) {
+        graphics.drawImage(image, x, y, null);
     }
 
     public void drawRectangle(int x, int y, int width, int height, Paint color) {
