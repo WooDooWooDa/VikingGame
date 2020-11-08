@@ -3,6 +3,8 @@ package cegepst.engine;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
@@ -68,7 +70,27 @@ public class RenderingEngine {
         panel.setBackground(Color.BLUE);
         panel.setFocusable(true);
         panel.setDoubleBuffered(true);
+        addMouseListener();
         screen.setPanel(panel);
+    }
+
+    private void addMouseListener() {
+        panel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) { }
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == 1) {
+                    System.out.println("left mouse click at : (" + e.getX() + "," + e.getY() + ")");
+                }
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) { }
+            @Override
+            public void mouseEntered(MouseEvent e) { }
+            @Override
+            public void mouseExited(MouseEvent e) { }
+        });
     }
 
     private RenderingHints getRenderingHints() {

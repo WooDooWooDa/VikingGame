@@ -14,9 +14,9 @@ public class VikingGame extends Game {
 
     public VikingGame() {
         gamePad = new GamePad();
+        menu = new Menu();
         viking = new Viking(gamePad);
         world = new World();
-        menu = new Menu();
         foreverAloneTree = new Tree(250, 300);
         viking.teleport(100 ,100);
     }
@@ -31,10 +31,13 @@ public class VikingGame extends Game {
         } else {
             foreverAloneTree.treeRootFromBottom();
         }
-        if (gamePad.isMenuPressed()) {
+        menu.update();
+        if (gamePad.isMenuPressed() && menu.CanBeOpen()) {
             menu.toggleMenu();
         }
-        viking.update();
+        if (!menu.isOpen()) {
+            viking.update();
+        }
     }
 
     @Override
@@ -47,7 +50,7 @@ public class VikingGame extends Game {
             foreverAloneTree.draw(buffer);
             viking.draw(buffer);
         }
-        if (menu.isMenuOpen()) {
+        if (menu.isOpen()) {
             menu.draw(buffer);
         }
     }
@@ -62,4 +65,5 @@ public class VikingGame extends Game {
     public void conclude() {
 
     }
+
 }

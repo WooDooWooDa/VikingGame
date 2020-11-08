@@ -1,9 +1,15 @@
 package cegepst;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.RenderingEngine;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class Menu {
@@ -12,20 +18,38 @@ public class Menu {
     private Image image;
     private final int x;
     private final int y;
-    private boolean isOpen = false;
+    private boolean opened = false;
+    private int menuCooldown = 50;
 
     public Menu() {
         loadImage();
-        x = 100;
-        y = 100;
+        x = 200;
+        y = 150;
     }
 
-    public boolean isMenuOpen() {
-        return isOpen;
+    public boolean isOpen() {
+        return opened;
     }
 
     public void toggleMenu() {
-        isOpen = !isOpen;
+        menuCooldown = 0;
+        opened = !opened;
+        if (opened) {
+            RenderingEngine.getInstance().getScreen().showCursor();
+        } else {
+            RenderingEngine.getInstance().getScreen().hideCursor();
+        }
+    }
+
+    public boolean CanBeOpen() {
+        return menuCooldown == 50;
+    }
+
+    public void update() {
+        menuCooldown++;
+        if (menuCooldown > 50) {
+            menuCooldown = 50;
+        }
     }
 
     public void draw(Buffer buffer) {
