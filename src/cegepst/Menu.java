@@ -4,12 +4,7 @@ import cegepst.engine.Buffer;
 import cegepst.engine.RenderingEngine;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 
 public class Menu {
