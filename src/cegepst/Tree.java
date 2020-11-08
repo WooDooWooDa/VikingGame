@@ -1,7 +1,7 @@
 package cegepst;
 
 import cegepst.engine.Buffer;
-import cegepst.engine.CollidableRepository;
+import cegepst.engine.entities.Blockade;
 import cegepst.engine.entities.StaticEntity;
 
 import javax.imageio.ImageIO;

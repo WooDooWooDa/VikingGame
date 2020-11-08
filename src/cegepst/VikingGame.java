@@ -10,11 +10,13 @@ public class VikingGame extends Game {
     private Viking viking;
     private World world;
     private Tree foreverAloneTree;
+    private Menu menu;
 
     public VikingGame() {
         gamePad = new GamePad();
         viking = new Viking(gamePad);
         world = new World();
+        menu = new Menu();
         foreverAloneTree = new Tree(250, 300);
         viking.teleport(100 ,100);
     }
@@ -29,6 +31,9 @@ public class VikingGame extends Game {
         } else {
             foreverAloneTree.treeRootFromBottom();
         }
+        if (gamePad.isMenuPressed()) {
+            menu.toggleMenu();
+        }
         viking.update();
     }
 
@@ -42,13 +47,15 @@ public class VikingGame extends Game {
             foreverAloneTree.draw(buffer);
             viking.draw(buffer);
         }
-
+        if (menu.isMenuOpen()) {
+            menu.draw(buffer);
+        }
     }
 
     @Override
     public void initialize() {
         RenderingEngine.getInstance().getScreen().hideCursor();
-        RenderingEngine.getInstance().getScreen().fullScreen();
+        //RenderingEngine.getInstance().getScreen().fullScreen();
     }
 
     @Override

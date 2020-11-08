@@ -1,6 +1,7 @@
 package cegepst;
 
 import cegepst.engine.Buffer;
+import cegepst.engine.entities.Blockade;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
