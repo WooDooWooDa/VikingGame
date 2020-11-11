@@ -3,6 +3,7 @@ package cegepst;
 import cegepst.engine.Buffer;
 import cegepst.engine.Game;
 import cegepst.engine.RenderingEngine;
+import cegepst.engine.Sound;
 
 public class VikingGame extends Game {
 
@@ -10,11 +11,10 @@ public class VikingGame extends Game {
     private Viking viking;
     private World world;
     private Tree foreverAloneTree;
-    private Menu menu;
+    private int soundCooldown = 40;
 
     public VikingGame() {
         gamePad = new GamePad();
-        menu = new Menu();
         viking = new Viking(gamePad);
         world = new World();
         foreverAloneTree = new Tree(250, 300);
@@ -26,18 +26,20 @@ public class VikingGame extends Game {
         if (gamePad.isQuitPressed()) {
             super.stop();
         }
+        soundCooldown--;
+        if (soundCooldown < 0) {
+            soundCooldown = 0;
+        }
+        if (gamePad.isMenuPressed() && soundCooldown == 0) {
+            soundCooldown = 40;
+            Sound.play("sounds/coinn.wav");
+        }
         if (viking.getY() < foreverAloneTree.getY() + 52) {
             foreverAloneTree.treeRootFromTop();
         } else {
             foreverAloneTree.treeRootFromBottom();
         }
-        menu.update();
-        if (gamePad.isMenuPressed() && menu.CanBeOpen()) {
-            menu.toggleMenu();
-        }
-        if (!menu.isOpen()) {
-            viking.update();
-        }
+        viking.update();
     }
 
     @Override
@@ -50,15 +52,13 @@ public class VikingGame extends Game {
             foreverAloneTree.draw(buffer);
             viking.draw(buffer);
         }
-        if (menu.isOpen()) {
-            menu.draw(buffer);
-        }
     }
 
     @Override
     public void initialize() {
         RenderingEngine.getInstance().getScreen().hideCursor();
         //RenderingEngine.getInstance().getScreen().fullScreen();
+        Sound.playLoop("musics/map.wav");
     }
 
     @Override
